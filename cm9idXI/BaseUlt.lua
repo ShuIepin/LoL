@@ -179,13 +179,12 @@ local OnTick = function()
     ::continue::
 end
 
----@type fun(object: GameObject, name: string, type: number, duration: number, status: string):void
-local OnTeleport = function(object, name, type, duration, status)
-    if object.TeamId ~= Player.TeamId then
+---@type fun(object: GameObject, name: string, duration: number, status: string):void
+local OnTeleport = function(object, name, duration, status)
+    if object.IsEnemy then
         RecallData[object.AsAI.Handle] = {
             Object = object,
             Name = name,
-            Type = type,
             Duration = duration,
             Status = status,
             StartTime = Game.GetTime()
